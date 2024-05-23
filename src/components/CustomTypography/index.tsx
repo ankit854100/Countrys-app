@@ -6,10 +6,10 @@ function CustomTypography(props: ICustomTypography) {
     const {name, value} = props;
   return (
       Array.isArray(value) ?
-      <Typography variant='subtitle2'>
+      <Typography variant='subtitle2' color='text.primary'>
           <b>{name}: </b> {value.map(item => item)}
       </Typography> :
-      <Typography variant='subtitle2'>
+      <Typography variant='subtitle2' color='text.primary'>
         <b>{name}: </b> {value}
     </Typography>
     )

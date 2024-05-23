@@ -1,3 +1,7 @@
+interface IAppBarProps {
+    mode: string
+    toggleTheme: () => void
+}
 interface ICard {
     name: string,
     population: number,
@@ -17,7 +21,8 @@ interface ICountryDetails {
     topLevelDomain: string,
     currencies: string,
     languages: any[],
-    image: string
+    image: string,
+    borders: string[]
 }
 
 interface ICountryContainerProps {
@@ -40,15 +45,21 @@ interface ISubHeaderProps {
     fetchCountriesByRegion: (value: string) => void,
     setCountriesFromSearch: (value: any[]) => void,
     setIsFetching: (value: boolean) => void
+    setError: (value: any) => void
 }
 
 interface ISearchBarProps {
     setCountriesFromSearch: (value: any[]) => void,
-    setIsFetching: (value: boolean) => void
+    setIsFetching: (value: boolean) => void,
+    setError: (value: any) => void
 }
 
 interface IFilterProps {
     fetchCountriesByRegion: (value: string) => void
+}
+
+interface ISnackBarProps {
+    message: string
 }
 
 export type {
@@ -59,5 +70,7 @@ export type {
     ICountryContainerProps,
     ISubHeaderProps,
     ISearchBarProps,
-    IFilterProps
+    IFilterProps,ISnackBarProps,
+    IAppBarProps
+    
 }

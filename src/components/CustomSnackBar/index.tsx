@@ -4,10 +4,11 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Grid } from '@mui/material';
+import { ISnackBarProps } from '../../interfaces';
 
-export default function CustomSnackBar() {
+export default function CustomSnackBar(props: ISnackBarProps) {
   const [open, setOpen] = React.useState(true);
-
+const { message } = props;
   const handleClick = () => {
     setOpen(true);
   };
@@ -41,7 +42,7 @@ export default function CustomSnackBar() {
         open={open}
         // autoHideDuration={6000}
         onClose={handleClose}
-        message="Something went wrong. Please try again"
+        message={message}
         action={action}
       />
   );

@@ -1,13 +1,14 @@
 import React, { useCallback, useState } from 'react'
-import { Grid, InputAdornment, TextField } from '@mui/material'
+import { Grid, InputAdornment, TextField, useTheme } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import { throttle } from 'lodash'
 import { ISearchBarProps } from '../../interfaces';
 
 function SearchBar(props: ISearchBarProps) {
-  const { setCountriesFromSearch, setIsFetching } = props;
+  const { setCountriesFromSearch, setIsFetching, setError } = props;
   const [query, setQuery] = useState('');
   // const [results, setResults] = useState([]);
+  const theme = useTheme();
   const searchURL = 'https://restcountries.com/v3.1/name/'
 
   // Throttled API call function
@@ -20,11 +21,17 @@ function SearchBar(props: ISearchBarProps) {
           .then((data) => {
             console.log({ data });
             // setResults(data.results)
-            setCountriesFromSearch(data);
+            if(!Array.isArray(data)){
+              setError(new Error(data.message))
+            } else {
+              console.log('updating the state')
+              setCountriesFromSearch(data);
+            }
             setIsFetching(false);
           })
           .catch((error) => {
             setIsFetching(false);
+            setError(error);
           });
       } else {
         // setResults([]);
@@ -43,7 +50,7 @@ function SearchBar(props: ISearchBarProps) {
     <TextField
       id="outlined-basic"
       variant="standard"
-      sx={{ width: '100%', boxShadow: '1px 1px 4px -1px rgba(0, 0, 0, 0.2)', padding: '1rem', borderRadius: '0.25rem' }}
+      sx={{ width: '100%', boxShadow: '1px 1px 4px -1px rgba(0, 0, 0, 0.2)', padding: '1rem', borderRadius: '0.25rem', backgroundColor: theme.palette.primary.main }}
       placeholder='search for countries...'
       InputProps={{
         disableUnderline: true,

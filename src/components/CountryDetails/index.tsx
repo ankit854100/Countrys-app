@@ -6,6 +6,7 @@ import CustomTypography from '../CustomTypography';
 import axios from 'axios';
 import CountryDetailsPageSkeleton from '../CountryDetailsPageSkeleton';
 import CustomSnackBar from '../CustomSnackBar';
+const countries = require('i18n-iso-countries')
 
 function CountryDetailsContainer(props: ICountryContainerProps) {
     const { name, backNavigation } = props;
@@ -30,9 +31,10 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
                 topLevelDomain: country.tld[0],
                 currencies: country.currencies[Object.keys(country.currencies)[0]].name,
                 languages: Object.values(country.languages).map((item) => item),
-                image: country.flags.png
+                image: country.flags.png,
+                borders: country.borders
             }
-            console.log({ values });
+
             setCountryDetails(values);
             setError(null);
         } catch (error) {
@@ -55,7 +57,7 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
             {fetching ?
                 <CountryDetailsPageSkeleton /> :
                 error ?
-                    <CustomSnackBar /> :
+                    <CustomSnackBar message={error.message} /> :
                     <Grid container sx={{ padding: '3rem' }}>
                         <Grid sx={{ marginBottom: '2rem' }}>
                             <Button variant="contained" onClick={() => backNavigation()} sx={{ paddingLeft: '2rem', paddingRight: '2rem' }}>
@@ -80,7 +82,7 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
                             </Grid>
                             <Grid lg={7} container justifyContent={'flex-start'} sx={{ padding: '1rem' }} >
                                 <Grid lg={12} sx={{ marginBottom: '1rem' }}>
-                                    <Typography variant='h1' component={'h1'} sx={{ fontWeight: '600', fontSize: '2rem' }}>
+                                    <Typography variant='h1' component={'h1'} color='text.primary' sx={{ fontWeight: '600', fontSize: '2rem' }}>
                                         <strong>{countryDetails?.commonName}</strong>
                                     </Typography>
                                 </Grid>
@@ -99,12 +101,20 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
                                     </Grid>
                                 </Grid>
                                 <Grid container alignItems={'center'}>
-                                    <Grid lg={3} component="span" sx={{ marginBottom: '0.5rem' }}><b>Border Countries:</b> </Grid>
-                                    <Grid lg={9} container gap={1.5} sx={{ marginBottom: '0.5rem' }}>
-                                        <Button variant="contained">France</Button>
-                                        <Button variant="contained">Germany</Button>
-                                        <Button variant="contained">Netherlands</Button>
-                                    </Grid>
+
+                                    {countryDetails?.borders ?
+                                        <>
+                                            <Grid xs={4} lg={2.5} component="span" sx={{ marginBottom: '0.5rem' }} color='text.primary'><b>Border Countries:</b> </Grid>
+                                            <Grid xs={8} lg={9} container gap={1.5} sx={{ marginBottom: '0.5rem' }}>
+                                                {
+                                                    countryDetails?.borders.map((item: string) => {
+                                                        return <Button variant="contained" sx={{ paddingTop: '1px', paddingBottom: '1px' }}>{item}</Button>
+                                                    })
+                                                }
+                                            </Grid>
+                                        </> :
+                                        <Grid xs={12} lg={12} component="span" sx={{ marginBottom: '0.5rem' }} color='text.primary'><b>Border Countries: Do not share border with any country.</b> </Grid>
+                                    }
                                 </Grid>
                             </Grid>
                         </Grid>

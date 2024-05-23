@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, useTheme } from '@mui/material';
 import { ICard } from '../../interfaces/'
 
 export default function ActionAreaCard(props : ICard) {
     const {name, population, region, capital, src, onCardClick } = props;
+    const theme = useTheme();
 
   return (
     <Card sx={{ maxWidth: '100%' }}>
@@ -17,7 +18,7 @@ export default function ActionAreaCard(props : ICard) {
           height="180"
           image={src}
           alt="green iguana"
-          sx={{ marginBottom: '1rem'}}
+          sx={{ marginBottom: '1rem', boxShadow: '1px 1px 4px -1px rgba(0, 0, 0, 0.2)' }}
         />
         <CardContent sx={{ paddingBottom: "2rem"}}>
           <Typography gutterBottom variant="h2" component="h2" sx={{ fontWeight: '600', fontSize: '1.2rem', marginBottom: '1rem'}}>

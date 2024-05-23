@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Container, Grid, Skeleton } from '@mui/material'
+import { Box, Container, Grid, Skeleton, useTheme } from '@mui/material'
 import Card from '../Card'
 import data from '../../data.json'
 import axios from 'axios';
@@ -9,6 +9,7 @@ import CustomCardSkeleton from '../CardSkeleton';
 export default function CardContainer(props: ICardContainerProps) {
 
   const {isFetching, countries, onCardClick} = props;
+  const theme = useTheme();
 
   return (
     <Grid container sx={{ width: "100%" }}>
