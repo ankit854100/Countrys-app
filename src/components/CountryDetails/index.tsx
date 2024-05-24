@@ -6,7 +6,6 @@ import CustomTypography from '../CustomTypography';
 import axios from 'axios';
 import CountryDetailsPageSkeleton from '../CountryDetailsPageSkeleton';
 import CustomSnackBar from '../CustomSnackBar';
-const countries = require('i18n-iso-countries')
 
 function CountryDetailsContainer(props: ICountryContainerProps) {
     const { name, backNavigation } = props;
