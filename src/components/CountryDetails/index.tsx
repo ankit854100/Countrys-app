@@ -17,7 +17,6 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
     const fetchCountryDetails = async () => {
         setFetching(true);
         setError(true);
-        console.log(props);
         try {
             const res = await axios.get(`https://restcountries.com/v3.1/name/${name}`);
             let country = res.data[0];
@@ -30,7 +29,7 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
                 capital: country.capital[0],
                 topLevelDomain: country.tld[0],
                 currencies: country.currencies[Object.keys(country.currencies)[0]].name,
-                languages: Object.values(country.languages).map((item) => item),
+                languages: Object.values(country.languages).map((item) => item + " , "),
                 image: country.flags.png,
                 borders: country.borders
             }
@@ -38,8 +37,6 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
             setCountryDetails(values);
             setError(null);
         } catch (error) {
-            console.log("Something unexpected issue happened!")
-            console.log({ error });
             setError(error);
         }
 
@@ -50,14 +47,12 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
         fetchCountryDetails();
     }, [])
 
-
-
     return (
         <>
             {fetching ?
                 <CountryDetailsPageSkeleton /> :
                 error ?
-                    <CustomSnackBar message={error.message} /> :
+                    <CustomSnackBar message={error.message} buttonText='back' backNavigation={backNavigation} /> :
                     <Grid container sx={{ padding: '3rem' }}>
                         <Grid sx={{ marginBottom: '2rem' }}>
                             <Button variant="contained" onClick={() => backNavigation()} sx={{ paddingLeft: '2rem', paddingRight: '2rem' }}>
@@ -100,8 +95,7 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
                                         <CustomTypography name="Languages" value={countryDetails && countryDetails.languages ? countryDetails.languages : ""} />
                                     </Grid>
                                 </Grid>
-                                <Grid container alignItems={'center'}>
-
+                                <Grid container alignItems={{xs:'flex-start', lg:'center'}}>
                                     {countryDetails?.borders ?
                                         <>
                                             <Grid xs={4} lg={2.5} component="span" sx={{ marginBottom: '0.5rem' }} color='text.primary'><b>Border Countries:</b> </Grid>

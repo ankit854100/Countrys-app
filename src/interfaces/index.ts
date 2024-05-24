@@ -59,7 +59,9 @@ interface IFilterProps {
 }
 
 interface ISnackBarProps {
-    message: string
+    message: string,
+    buttonText?: string
+    backNavigation?: () => void
 }
 
 export type {

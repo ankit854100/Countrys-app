@@ -13,9 +13,7 @@ export default function Filter(props: IFilterProps) {
   const theme = useTheme();
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log('handleChange', event)
     setCountry(event.target.value);
-    console.log(event.target.value);
     fetchCountriesByRegion(event.target.value);
   };
 

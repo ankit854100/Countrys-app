@@ -8,7 +8,7 @@ import { ISnackBarProps } from '../../interfaces';
 
 export default function CustomSnackBar(props: ISnackBarProps) {
   const [open, setOpen] = React.useState(true);
-const { message } = props;
+  const { message, buttonText, backNavigation } = props;
   const handleClick = () => {
     setOpen(true);
   };
@@ -22,10 +22,13 @@ const { message } = props;
   };
 
   const action = (
-    <Grid sx={{ width: '100%'} }>
-      <Button color="primary" size="small" onClick={handleClose}>
-        Try Again
-      </Button>
+    <Grid sx={{ width: '100%' }}>
+      {
+        buttonText && 
+        <Button color="primary" size="small" onClick={backNavigation}>
+          Back
+        </Button>
+      }
       <IconButton
         size="small"
         aria-label="close"
@@ -38,12 +41,12 @@ const { message } = props;
   );
 
   return (
-      <Snackbar
-        open={open}
-        // autoHideDuration={6000}
-        onClose={handleClose}
-        message={message}
-        action={action}
-      />
+    <Snackbar
+      open={open}
+      // autoHideDuration={10000}
+      onClose={handleClose}
+      message={message}
+      action={action}
+    />
   );
 }

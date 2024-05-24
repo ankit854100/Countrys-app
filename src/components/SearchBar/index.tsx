@@ -7,11 +7,10 @@ import { ISearchBarProps } from '../../interfaces';
 function SearchBar(props: ISearchBarProps) {
   const { setCountriesFromSearch, setIsFetching, setError } = props;
   const [query, setQuery] = useState('');
-  // const [results, setResults] = useState([]);
   const theme = useTheme();
-  const searchURL = 'https://restcountries.com/v3.1/name/'
+  const searchURL: string = 'https://restcountries.com/v3.1/name/'
 
-  // Throttled API call function
+  // Throttling API call for search text
   const throttledSearch = useCallback(
     throttle((searchQuery: string) => {
       if (searchQuery) {
@@ -19,12 +18,9 @@ function SearchBar(props: ISearchBarProps) {
         fetch(`${searchURL}${searchQuery}`)
           .then((response) => response.json())
           .then((data) => {
-            console.log({ data });
-            // setResults(data.results)
             if(!Array.isArray(data)){
               setError(new Error(data.message))
             } else {
-              console.log('updating the state')
               setCountriesFromSearch(data);
             }
             setIsFetching(false);
@@ -33,10 +29,8 @@ function SearchBar(props: ISearchBarProps) {
             setIsFetching(false);
             setError(error);
           });
-      } else {
-        // setResults([]);
-      }
-    }, 1000), // Adjust the delay (1000 ms) as needed
+      } 
+    }, 1000),
     []
   );
 
