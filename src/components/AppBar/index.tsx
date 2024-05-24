@@ -13,7 +13,7 @@ export default function TopAppBar(props: IAppBarProps) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ padding: '0.5rem 4rem', boxShadow: '1px 1px 4px -1px rgba(0, 0, 0, 0.2)' }}>
+      <AppBar position="fixed" sx={{ padding: '0.5rem 4rem', boxShadow: '1px 1px 4px -1px rgba(0, 0, 0, 0.2)' }}>
         <Toolbar sx={{ justifyContent: 'space-between', padding: '0 !important'}}>
           <Typography variant="h1" component="div" sx={{ flexGrow: 1, fontSize: '1.5rem' }}>
             <b>Where in the World?</b>

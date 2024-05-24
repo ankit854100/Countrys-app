@@ -124,7 +124,7 @@ function App() {
         <AppBar mode={mode} toggleTheme={toggleTheme} />
         {showCardDetails ?
           <CountryDetailsContainer name={countryDetailsContainerProps ? countryDetailsContainerProps : ""} backNavigation={redirectToHomepage} /> :
-          <Grid sx={{ padding: '3rem' }}>
+          <Grid sx={{ padding: '3rem', marginTop: '3rem' }}>
             <SubHeader fetchCountriesByRegion={fetchCountriesByRegion} setCountriesFromSearch={setCountriesFromSearch} setIsFetching={setIsFetching} setError={setError} />
             {error && <CustomSnackBar message={error.message} />}
             <CardContainer isFetching={isFetching} countries={countries} onCardClick={onCardClick} />

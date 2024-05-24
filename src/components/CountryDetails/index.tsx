@@ -44,6 +44,7 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         fetchCountryDetails();
     }, [])
 
@@ -53,7 +54,7 @@ function CountryDetailsContainer(props: ICountryContainerProps) {
                 <CountryDetailsPageSkeleton /> :
                 error ?
                     <CustomSnackBar message={error.message} buttonText='back' backNavigation={backNavigation} /> :
-                    <Grid container sx={{ padding: '3rem' }}>
+                    <Grid container sx={{ padding: '3rem', marginTop: '4rem' }}>
                         <Grid sx={{ marginBottom: '2rem' }}>
                             <Button variant="contained" onClick={() => backNavigation()} sx={{ paddingLeft: '2rem', paddingRight: '2rem' }}>
                                 <KeyboardBackspaceOutlinedIcon fontSize='medium' sx={{ marginRight: '0.5rem' }} />

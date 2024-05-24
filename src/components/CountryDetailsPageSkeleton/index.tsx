@@ -4,7 +4,7 @@ import CustomTypography from '../CustomTypography'
 
 function CountryDetailsPageSkeleton() {
     return (
-        <Grid container sx={{ padding: '3rem', width: '100%' }}>
+        <Grid container sx={{ padding: '3rem', width: '100%', marginTop: '4rem' }}>
             <Grid sx={{ marginBottom: '2rem' }}>
                 <Skeleton variant='rectangular' width={'5rem'} height={'2rem'} />
             </Grid>
